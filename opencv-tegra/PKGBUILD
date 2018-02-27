@@ -1,0 +1,32 @@
+# Maintainer: Clouds
+
+pkgname=cuda-tegra
+pkgver=8.0.84
+pkgrel=1
+arch=(aarch64)
+provides=("opencv")
+license=("Unknown")
+source=("cuda-repo-l4t-8-0-local_8.0.84-1_arm64.deb")
+sha256sums=("01effce5a9d03dc2eac6dfa9fdf2357d2cd2227ff7bbf785584de976d0815e8d")
+
+prepare() {
+	cd "${srcdir}"
+	tar xpf data.tar.gz
+}
+
+build() {
+	cd "${srcdir}/var/cuda-repo-8-0-local"
+	for i in *.deb; do
+		base=${i%.deb}
+		echo "extracting $i"
+		mkdir -p "$base"
+		cd "$base" && ar x "../$i" && cd ..
+	done
+}
+
+package() {
+	cd "${pkgdir}"
+	find "${srcdir}/var/cuda-repo-8-0-local" -name data.tar.gz -exec tar xpf {} \;
+	find "${srcdir}/var/cuda-repo-8-0-local" -name data.tar.xz -exec tar xjf {} \;
+}
+

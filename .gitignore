@@ -2,7 +2,12 @@ src/
 pkg/
 *.pkg.tar.xz
 
+cuda/cuda-repo-l4t-*.deb
+cudnn/libcudnn*.deb
+cudnn/cudnn-*.tar
 gcc5/gcc-*.tar.xz
 gcc5/isl-*.tar.bz2
 intel-tbb-gcc5/*.tar.gz
 openblas-lapack/OpenBLAS-*.tar.gz
+opencv-tegra/libopencv4tegra-repo_*.deb
+tegra-drivers/Tegra*_Linux_*.tbz2

@@ -1,0 +1,30 @@
+# Maintainer: Clouds
+
+pkgname=tegra-drivers
+pkgver=R28.1.0
+pkgrel=1
+_pkgname=Tegra186_Linux
+_pkgarch=aarch64
+arch=(aarch64)
+license=("Unknown")
+source=("Tegra186_Linux_R28.1.0_aarch64.tbz2"
+        "post_install.sh")
+sha256sums=("8c0634da2a47011dceb14bb4639ad8abcf89b0b67d8bd9cd58edbd251ccb321c"
+            "SKIP" #5712b0f9837f71bf237e734088322b0ec96031b8756281bd8737aaeb5d9dc05f
+	    )
+
+#prepare() {}
+
+build() {
+	cd "${srcdir}/Linux_for_Tegra"
+	sed -i 's%^#!/bin/bash$%\0\n\nsudo() {\n    "$@"\n}\n%' apply_binaries.sh
+}
+
+package() {
+	cd "${srcdir}/Linux_for_Tegra"
+	mkdir -p "${pkgdir}/etc/passwd"
+	LDK_ROOTFS_DIR="${pkgdir}" sh "${srcdir}/Linux_for_Tegra/apply_binaries.sh"
+	LDK_PKG_DIR="${pkgdir}" sh "${srcdir}/post_install.sh"
+	rmdir "${pkgdir}/etc/passwd"
+}
+

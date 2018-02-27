@@ -1,0 +1,36 @@
+# Maintainer: Clouds
+
+pkgname=cudnn
+pkgver=6.0.21
+pkgrel=1
+arch=(aarch64)
+license=("Unknown")
+source=("libcudnn6_6.0.21-1+cuda8.0_arm64.deb"
+        "libcudnn6-dev_6.0.21-1+cuda8.0_arm64.deb"
+	"libcudnn6-doc_6.0.21-1+cuda8.0_arm64.deb")
+sha256sums=("3fccf1b58dc9b9efa24d2c97be9f230744b597a6573ec085d75aa543f0e41208"
+            "6a22969346a86cd1a09330d6baa15c071735564cecc5a517d30591d40e4bbe72"
+            "cb4c30331916da5917dec02d059ab63fe13dcd622b6e6fee2b9687ca8008fd16")
+noextract=(${source[@]})
+
+build() {
+	cd "${srcdir}"
+	for i in *.deb; do
+		base=${i%.deb}
+		echo "extracting $i"
+		mkdir -p "$base"
+		cd "$base" && ar x "../$i" && cd ..
+	done
+}
+
+package() {
+	cd "${pkgdir}"
+	#find "${srcdir}" -name data.tar.gz -exec tar xpf {} \;
+	find "${srcdir}" -name data.tar.xz -exec tar xJf {} \;
+	rm -rf "${pkgdir}/usr/share/lintian"
+	mv "${pkgdir}/usr/lib"/*-linux-*/* "${pkgdir}/usr/lib"
+	rmdir "${pkgdir}/usr/lib"/*-linux-*
+	mv "${pkgdir}/usr/include"/*-linux-*/* "${pkgdir}/usr/include"
+	rmdir "${pkgdir}/usr/include"/*-linux-*
+}
+
