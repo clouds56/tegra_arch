@@ -2,7 +2,7 @@
 Port nvidia tegra cuda to arch
 
 see also
-* see also [nvidia devtalk](https://devtalk.nvidia.com/default/topic/1017146/error-jetpack-must-be-run-on-ubuntu-14-04-or-16-04-platform-detected-16-10-platform-/?offset=1)
+* [nvidia devtalk](https://devtalk.nvidia.com/default/topic/1017146/error-jetpack-must-be-run-on-ubuntu-14-04-or-16-04-platform-detected-16-10-platform-/?offset=1)
 
 
 # Setup
@@ -30,7 +30,7 @@ see also
 Shutdown your TX2, connect to HOST via USB and entering recover mode (hold the recovery button while powering on the Jetson).
 Then you should see your device via `lsusb`, 
 ```
-~/JetPack/Linux_for_Tegra # ./flash.sh jetson-tx1 mmcblk0p1
+~/JetPack/Linux_for_Tegra # ./flash.sh jetson-tx2 mmcblk0p1
 ```
 
 4. Boot your arch linux
