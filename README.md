@@ -43,3 +43,9 @@ $ cd <package_name>
 $ makepkg -s
 # pacman -U <built-package>.pkg.tar.xz
 ```
+
+# Packages
+* gcc5 [aur](https://aur.archlinux.org/packages/gcc5/) see also [archlinuxarm](https://github.com/archlinuxarm/PKGBUILDs/tree/eb36f1d54d9676bb83acd7ace87b50bfcaf84eb1/core/gcc)
+* openblas-lapack [aur](https://aur.archlinux.org/packages/openblas-lapack/)
+* intel-tbb-gcc5 [aur](https://aur.archlinux.org/packages/intel-tbb-gcc6/)
+Welcome to PR or issue when package is out of date.
